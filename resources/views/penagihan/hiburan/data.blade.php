@@ -33,6 +33,12 @@
                 <a href="{{ url('pgh_hiburan/add') }}" class="btn btn-primary btn-normal">
                     <i class="fa fa-user-plus"></i> Tambah
                 </a>
+                
+                
+                <a class="btn btn-warning btn-normal" data-toggle="modal" >
+                    <i class="fa fa-money"></i> Penagihan
+                </a>
+
             </div>
         </div>
         <div class="box-body table-responsive">
@@ -50,7 +56,7 @@
                         <!-- <th>Denda</th> -->
                         <th>Total Keseluruhan</th>
                         {{-- <th>Status</th> --}}
-                        <th style="width: 180px" class="text-center">Aksi</th>
+                        <th style="width: 100px" class="text-center">Aksi</th>
                     </tr>
                 </thead>
 
@@ -79,9 +85,9 @@
                             <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin untuk menghapus data?')">
                             <i class="fa fa-trash"></i> Hapus
                             </button>
-                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#paymentModal{{ $pgh_hiburan->id }}">
+                            {{-- <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#paymentModal{{ $pgh_hiburan->id }}">
                                 <i class="fa fa-money"></i> Penagihan 
-                            </button>
+                            </button> --}}
                 {{-- <a href="{{ url('pgh_hiburan/paymentMidtrans/'.$pgh_hiburan->id.'/'.$pgh_hiburan->npwpd.'/'.$pgh_hiburan->nama_pajak.'/'.$pgh_hiburan->no_penagihan.'/'.$pgh_hiburan->total) }}" class="btn btn-warning btn-xs">
                         <i class="fa fa-money"></i> Bayar
                 </a> --}}
@@ -209,23 +215,55 @@
                 </tbody>
                 
             </table>
-            
+
+            {{-- <button type="submit" class="btn btn-default btn-normal">Submit</button> --}}
+            {{-- <a href="{{ url('pgh_hiburan/pelunasan') }}" class="btn btn-default btn-normal">DATA PELUNASAN</a> --}}
+
             <div class="box-body">
-                <form action="" method="post">
+                <form action="{{ route('penagihan.hiburan.data') }}" method="get" id="filterForm">
                     <div class="row">
-                            <div class="col-md-2">
-                                <label for="awal"> Dari Tanggal: </label>
-                                <input type="date" name="awal" id="awal" class="form-control">
-                                <br>
-                                <a href="{{ url('pgh_hiburan/pelunasan') }}" type="submit" class="btn btn-default btn-normal"> DATA PELUNASAN </a>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="akhir"> Sampai Tanggal: </label>
-                                <input type="date" name="akhir" id="akhir" class="form-control">
-                            </div>
+                        <div class="col-md-2">
+                            <label for="bulan">Pilih Bulan:</label>
+                            <select name="bulan" id="bulan" class="form-control">
+                                <option value="">- Pilih Bulan -</option>
+                                <option value="01">Januari</option>
+                                <option value="02">Februari</option>
+                                <option value="03">Maret</option>
+                                <option value="04">April</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Juni</option>
+                                <option value="07">Juli</option>
+                                <option value="08">Agustus</option>
+                                <option value="09">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
                     </div>
                 </form>
+            
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var selectBulan = document.getElementById('bulan');
+                        
+                        // Set selected value based on query string
+                        var urlParams = new URLSearchParams(window.location.search);
+                        var bulan = urlParams.get('bulan');
+                        if (bulan) {
+                            selectBulan.value = bulan;
+                        }
+                        
+                        // Add event listener for change event
+                        selectBulan.addEventListener('change', function () {
+                            // Submit the form when month is selected
+                            document.getElementById('filterForm').submit();
+                        });
+                    });
+                </script>
             </div>
+            
+            
             
         </div>
     </div>

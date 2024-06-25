@@ -39,15 +39,15 @@
                 <tr>
                         <th style="width: 10px">No</th>
                         <th>NPWPD</th>
-                        <th>Nama Pajak</th>
-                        <th>Nama Pemilik Pajak</th>
+                        <th>Nama Usaha</th>
+                        <th>Nama Pemilik Usaha</th>
                         <th>Jenis</th>
                         {{-- <th>Username</th> --}}
                         <th>Nomor Telepon/WhatsApp</th>
                         <th>Alamat</th>
                         <th>Omset</th>
-                        <th>Pajak</th>
-                        <th style="width: 50px">SPTPD</th>
+                        {{-- <th>Pajak</th> --}}
+                        {{-- <th style="width: 50px">SPTPD</th> --}}
                         <th style="width: 100px" class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -58,22 +58,22 @@
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $wp->npwpd }}</td>
                     <td>{{ $wp->nama_pajak }}</td>
-                    <td>{{ $wp->jenis }}</td>
                     <td>{{ $wp->nama_kelola }}</td>
+                    <td>{{ $wp->jenis }}</td>
                     {{-- <td>{{ $wp->username }}</td> --}}
                     <td>{{ $wp->no_telepon }}</td>
                     <td>{{ $wp->alamat }}</td>
                     <td>Rp{{ number_format($wp->omset, 0, ',', '.') }}</td>
-                    <td>{{ number_format($wp->pajak, 0, ',', '.') }}%</td>
+                    {{-- <td>{{ number_format($wp->pajak, 0, ',', '.') }}%</td> --}}
 
                     <!-- <td>
-                        @if($wp->sptpd)
+                        {{-- @if($wp->sptpd)
                             <img src="{{ asset('storage/' . $wp->sptpd) }}" alt="SPTPD Image" style="width: 100px; height: auto;">
                         @else
                             Tidak ada file
-                        @endif
+                        @endif --}}
                     </td> -->
-                    <td class="text-center">
+                    {{-- <td class="text-center">
                     @if($wp->sptpd)
                         <a href="{{ asset('storage/' . $wp->sptpd) }}" class="btn bg-orange btn-xs" target="_blank">
                             SPTPD
@@ -81,7 +81,7 @@
                     @else
                         Tidak ada file
                     @endif
-                </td>
+                    </td> --}}
                     <td class="text-center">
                         <a href="{{ url('wp/edit/'.$wp->id) }}" class="btn bg-green btn-xs">
                             <i class="fa fa-pencil"></i> Edit

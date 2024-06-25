@@ -31,9 +31,9 @@
                             </div> --}}
                             {{-- <input type="text" name="npwpd" id="npwpd" class="form-control" value="{{ old('npwpd') }}" readonly> --}}
 {{-- 
-                            <div class="form-group">
-                                <label for="npwpd">NPWPD</label>
-                                <div class="form-group input-group">
+<div class="form-group">
+    <label for="npwpd">NPWPD</label>
+    <div class="form-group input-group">
                                     <select name="jenis" id="jenis" class="form-control" value="{{ old('jenis') }}">
                                         <i class="fa fa-search"></i>
                                         <option value="">Pilih NPWPD</option>
@@ -50,14 +50,18 @@
                                 </div>
                             </div> --}}
                             
+                            <div class="form-group">
+                                <label for="npwpd">NPWPD</label>
+                                <input type="text" name="npwpd" id="npwpd" class="form-control"  readonly>
+                            </div>
 
                             <div class="form-group">
-                                <label for="nama_pajak">NPWPD</label>
-                            <select name="npwpd" id="jenis" class="form-control">
+                                <label for="nama_pajak">Nama Pajak</label>
+                            <select name="nama_pajak" id="jenis" class="form-control">
                                 <i class="fa fa-search"></i>
                                 <option value="">- Pilih -</option>
                                 @foreach ($wpData as $item)
-                                    <option value="{{$item->npwpd}}">{{$item->npwpd}}</option>
+                                    <option value="{{$item->nama_pajak}}">{{$item->nama_pajak}}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -66,24 +70,24 @@
                             
                             <script>
                             document.getElementById('jenis').addEventListener('change', function() {
-                                let npwpd = this.value;
-                                if (npwpd) {
-                                    fetchData(npwpd);
+                                let nama_pajak = this.value;
+                                if (nama_pajak) {
+                                    fetchData(nama_pajak);
                                 } else {
                                     document.getElementById('result').innerHTML = ''; // Kosongkan hasil jika tidak ada NPWPD yang dipilih
                                 }
                             });
 
-                            function fetchData(npwpd) {
-                                fetch(`/search-wp?npwpd=${npwpd}`)
+                            function fetchData(nama_pajak) {
+                                fetch(`/search-wp?nama_pajak=${nama_pajak}`)
                                     .then(response => response.json())
                                     .then(data => {
-                                        let namaDiv = document.getElementById('nama_pajak');
+                                        let namaDiv = document.getElementById('npwpd');
                                         let teleponDiv = document.getElementById('no_telepon');
                                         let omsetDiv = document.getElementById('omset');
                                         let pajakDiv = document.getElementById('pajak');
                                         if (data) {
-                                            namaDiv.value = `${data.nama_pajak}`;
+                                            npwpdDiv.value = `${data.npwpd}`;
                                             teleponDiv.value = `${data.no_telepon}`;
                                             omsetDiv.value = `${data.omset}`;
                                             pajakDiv.value = `${data.pajak}`;
@@ -96,10 +100,6 @@
                             
                             
 
-                            <div class="form-group">
-                                <label for="nama_pajak">Nama Pajak</label>
-                                <input type="text" name="nama_pajak" id="nama_pajak" class="form-control"  readonly>
-                            </div>
 
                             <!-- <div class="form-group">
                                 <label for="no_penagihan">Nomor Penagihan</label>

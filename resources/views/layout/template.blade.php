@@ -308,10 +308,10 @@
         <!-- =============================================== -->
 
         <footer class="main-footer">
-            <div class="pull-right hidden-xs">
+            {{-- <div class="pull-right hidden-xs">
                 <b>Versi</b> 1.0
-            </div>
-            <strong><a href="https://alakasemesta.com" target="blank">CV Alaka Semesta</a> 2023</strong>
+            </div> --}}
+            <strong><a href="https://alakasemesta.com" target="blank">Pemerintah Kota Ambon</a> 2024</strong>
         </footer>
     </div>
 

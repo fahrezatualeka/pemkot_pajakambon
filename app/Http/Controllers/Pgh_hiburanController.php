@@ -11,11 +11,24 @@ use Illuminate\Support\Str;
 
 class Pgh_hiburanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = Pgh_hiburan::orderBy('tanggal', 'desc')->get();
-        return view('penagihan/hiburan/data', compact('data'));
-    }
+        $query = Pgh_hiburan::query();
+    
+        // Filter berdasarkan bulan jika ada request bulan
+        if ($request->has('bulan') && $request->bulan != '') {
+            $bulan = $request->bulan;
+            $query->whereMonth('tanggal', $bulan);
+        }
+    
+        $data = $query->orderBy('tanggal', 'desc')->get();
+    
+        if ($request->ajax()) {
+            return view('penagihan/hiburan.data-ajax', compact('data'));
+        }
+    
+        return view('penagihan/hiburan.data', compact('data'));
+    }    
     
     // PENGECEKAN DATA HALAMAN
     public function create()
